@@ -74,7 +74,7 @@ const translations: Record<Language, Record<string, string>> = {
     'testimonials.description': 'Descobreix les experiències dels nostres clients satisfets amb els projectes d\'EBR',
 
     // Footer
-    'footer.developed': 'Desenvolupat amb ❤ per',
+    'footer.developed': 'Desenvolupat per',
     'footer.rights': 'Tots els drets reservats',
   },
   es: {
@@ -142,7 +142,7 @@ const translations: Record<Language, Record<string, string>> = {
     'testimonials.description': 'Descubre las experiencias de nuestros clientes satisfechos con los proyectos de EBR',
 
     // Footer
-    'footer.developed': 'Desarrollado con ❤ por',
+    'footer.developed': 'Desarrollado por',
     'footer.rights': 'Todos los derechos reservados',
   },
 };
