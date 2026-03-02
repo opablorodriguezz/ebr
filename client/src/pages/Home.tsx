@@ -1,0 +1,463 @@
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import Testimonials from '@/components/Testimonials';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useState } from 'react';
+
+export default function Home() {
+  const { t, language } = useLanguage();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // Simulate form submission
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log('Form submitted:', formData);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    } catch (error) {
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // All 57 gallery images from CDN
+  const galleryImages = [
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (1)_64aac639.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (2)_3c5e9f8a.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (3)_b2c8d4f1.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (4)_e7a2f5c3.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (5)_9d1b6e8f.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (6)_4c7f2a9b.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (7)_6e5d3c1a.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (8)_f2a9b7d4.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41_8c3e5f2b.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (1)_f9ca92de.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (10)_a1f4c6e9.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (11)_7b2d8f3c.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (12)_c9e1a5b6.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (2)_d3f7c8a2.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (3)_5e6b9d1f.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (4)_8a2c4e7b.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (5)_b1f3a9c5.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (6)_e4d7f2a8.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (7)_9c5a1b3d.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (8)_6f2e8a4c.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (9)_a7d3c1e9.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42_2b8f5c6a.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43 (1)_d1e4a7f3.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43 (2)_8c9b2f5e.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43 (3)_4a6d1c8b.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43 (4)_f5e2a9d7.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43 (5)_7b3f6c1a.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43 (6)_c8a5d2e4.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43 (7)_9e1b7f3c.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.43_5d2a8c6f.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.44 (1)_b4e9a1d5.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.44 (2)_e7f3c8a2.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.44 (3)_6a1d5f9b.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.44 (4)_c3f2a7e1.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.44 (5)_8b4e6c3d.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.44 (6)_f1a9d2c5.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.44_8d56d6ca.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.00.24_af2c5151.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (1)_52df88a9.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (2)_614c4bbe.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (3)_6e9cb627.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (4)_4a381c6f.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (5)_fdbbcc12.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (6)_c16bebd2.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (7)_7a5cde1e.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53_50561c93.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.54 (1)_880b0324.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.54_cdcac6ff.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.06.04_7c432c72.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.07.12_5759b63d.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.07.30_d9f4528e.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.09.03_36e0fe72.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.09.35_420453db.jpeg',
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.09.53_2b2d9a62.jpeg',
+  ];
+
+  const suppliers = [
+    { 
+      name: 'Arquimatt', 
+      logo: 'https://www.arquimatt.com/logo.svg'
+    },
+    { 
+      name: 'Bigmat', 
+      logo: 'https://www.bigmat.es/logo.svg'
+    },
+    { 
+      name: 'Leroy Merlin', 
+      logo: 'https://www.leroymerlin.es/logo.svg'
+    },
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col bg-white">
+      <Header />
+      <WhatsAppButton />
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/hero-luxury-interior-final-YoyjHtxaeifvEiU4bE5jPM.webp"
+              alt="Hero"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/30"></div>
+          </div>
+
+          <div className="relative z-10 text-center text-white px-4">
+            <h1 className="font-serif text-6xl md:text-7xl font-bold mb-6">
+              {t('hero.title')}
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 font-light">
+              {t('hero.subtitle')}
+            </p>
+            <button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 text-lg font-semibold transition-colors duration-300">
+              {t('hero.cta')}
+            </button>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="py-24 bg-white">
+          <div className="container">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="font-serif text-5xl font-bold mb-8 text-gray-900">
+                  {t('about.title')}
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                  {t('about.description')}
+                </p>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-8">
+                  <div className="border-l-2 border-amber-600 pl-4">
+                    <div className="text-4xl font-serif font-bold text-amber-600 mb-2">500+</div>
+                    <p className="text-sm text-gray-600">{t('about.projects')}</p>
+                  </div>
+                  <div className="border-l-2 border-amber-600 pl-4">
+                    <div className="text-4xl font-serif font-bold text-amber-600 mb-2">300+</div>
+                    <p className="text-sm text-gray-600">{t('about.clients')}</p>
+                  </div>
+                  <div className="border-l-2 border-amber-600 pl-4">
+                    <div className="text-4xl font-serif font-bold text-amber-600 mb-2">20+</div>
+                    <p className="text-sm text-gray-600">{t('about.years')}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative h-96">
+                <img
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (1)_64aac639.jpeg"
+                  alt="About"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section id="services" className="py-24 bg-gray-50">
+          <div className="container">
+            <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
+              {t('services.title')}
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {/* Reformas Integrales */}
+              <div className="bg-white p-8 hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 mb-6 overflow-hidden">
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (1)_f9ca92de.jpeg"
+                    alt="Reformas"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-3 text-gray-900">
+                  {t('services.kitchens')}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {t('services.kitchens_desc')}
+                </p>
+              </div>
+
+              {/* Obra Nueva */}
+              <div className="bg-white p-8 hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 mb-6 overflow-hidden">
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (1)_38c2cd56.jpeg"
+                    alt="Obra Nueva"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-3 text-gray-900">
+                  {t('services.bathrooms')}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {t('services.bathrooms_desc')}
+                </p>
+              </div>
+
+              {/* Cuinas */}
+              <div className="bg-white p-8 hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 mb-6 overflow-hidden">
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (1)_64aac639.jpeg"
+                    alt="Cuinas"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-3 text-gray-900">
+                  {t('services.living')}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {t('services.living_desc')}
+                </p>
+              </div>
+
+              {/* Banys */}
+              <div className="bg-white p-8 hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 mb-6 overflow-hidden">
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (2)_614c4bbe.jpeg"
+                    alt="Banys"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-3 text-gray-900">
+                  {t('services.bedrooms')}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {t('services.bedrooms_desc')}
+                </p>
+              </div>
+
+              {/* Pintura i acabats */}
+              <div className="bg-white p-8 hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 mb-6 overflow-hidden">
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 17.03.53 (2)_ef431beb.jpeg"
+                    alt="Pintura"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-3 text-gray-900">
+                  {t('services.painting')}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {t('services.painting_desc')}
+                </p>
+              </div>
+
+              {/* Paviments i sòls */}
+              <div className="bg-white p-8 hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 mb-6 overflow-hidden">
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (1)_f9ca92de.jpeg"
+                    alt="Paviments"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-3 text-gray-900">
+                  {t('services.flooring')}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {t('services.flooring_desc')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Portfolio Section */}
+        <section id="portfolio" className="py-24 bg-white">
+          <div className="container">
+            <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
+              {t('portfolio.title')}
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryImages.map((image, index) => (
+                <div key={index} className="relative h-64 overflow-hidden group cursor-pointer">
+                  <img
+                    src={image}
+                    alt={`Project ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <Testimonials />
+
+        {/* Suppliers Section */}
+        <section className="py-24 bg-gray-50">
+          <div className="container">
+            <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
+              {t('suppliers.title')}
+            </h2>
+            <p className="text-center text-gray-600 mb-12 text-lg">
+              {t('suppliers.description')}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+              {suppliers.map((supplier, index) => (
+                <div key={index} className="flex justify-center">
+                  <img
+                    src={supplier.logo}
+                    alt={supplier.name}
+                    className="h-20 object-contain hover:opacity-80 transition-opacity"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Google Maps Section */}
+        <section className="py-24 bg-white">
+          <div className="container">
+            <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
+              {t('location.title')}
+            </h2>
+
+            <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2997.3247319999997!2d2.2089!3d41.9359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4f8f8f8f8f8f9%3A0x1234567890abcdef!2sVic%2C%20Barcelona%2C%20Spain!5e0!3m2!1sen!2ses!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-gray-600 text-lg">
+                {t('location.description')}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-24 bg-gray-50">
+          <div className="container">
+            <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
+              {t('contact.title')}
+            </h2>
+
+            <div className="max-w-2xl mx-auto">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    {t('contact.name')}
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleFormChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-gray-700 font-semibold mb-2">
+                      {t('contact.email')}
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleFormChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-semibold mb-2">
+                      {t('contact.phone')}
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleFormChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    {t('contact.message')}
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleFormChange}
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 font-semibold rounded-lg transition-colors duration-300 disabled:opacity-50"
+                >
+                  {isSubmitting ? t('contact.sending') : t('contact.send')}
+                </button>
+
+                {submitStatus === 'success' && (
+                  <p className="text-green-600 text-center font-semibold">
+                    {t('contact.success')}
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
