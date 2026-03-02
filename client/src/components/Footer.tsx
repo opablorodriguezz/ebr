@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-400">
               {t('footer.developed')}{' '}
-              <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-500 transition-colors">
+              <a href="https://wa.me/5524992401321?text=Hola, me gustaría conocer más sobre vuestro servicio de desarrollo de sitios web." target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-500 transition-colors">
                 Pablo Eduardo
               </a>
             </p>
