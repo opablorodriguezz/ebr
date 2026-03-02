@@ -156,10 +156,6 @@ export default function Home() {
               {t('hero.cta')}
             </a>
             
-            <button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 text-lg font-semibold transition-colors duration-300">
-              {t('hero.cta')}
-            </button>
-          
           </div>
         </section>
 
