@@ -17,7 +17,7 @@ export default function Footer() {
               <h3 className="font-serif text-lg font-bold">EBR</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Especialistes en reformes de luxe per a clients de solvència econòmica. Qualitat, precisió i elegància en cada projecte.
+              Qualitat, precisió i perfecció en cada projecte.
             </p>
           </div>
 
