@@ -2,7 +2,7 @@ import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
   const phoneNumber = '34637306932'; // Número sem símbolos
-  const message = 'Hola, me gustaría conocer más sobre vuestros servicios de obras y reformas.';
+  const message = 'Hola, m’agradaria conèixer més sobre els vostres serveis d’obres i reformes.';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
