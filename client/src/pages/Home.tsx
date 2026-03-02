@@ -290,7 +290,7 @@ export default function Home() {
               <div className="bg-white p-8 hover:shadow-lg transition-shadow duration-300">
                 <div className="h-48 mb-6 overflow-hidden">
                   <img
-                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.42 (1)_f9ca92de.jpeg"
+                    src="https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44.jpeg"
                     alt="Paviments"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
