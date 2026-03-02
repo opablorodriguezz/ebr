@@ -101,15 +101,15 @@ export default function Home() {
   const suppliers = [
     { 
       name: 'Arquimatt', 
-      logo: 'https://www.arquimatt.com/logo.svg'
+      logo: 'https://de.cdn-website.com/81f7c24bc36c4d448c4d1a6792321105/dms3rep/multi/ARQUIMATT-web-transp.png'
     },
     { 
       name: 'Bigmat', 
-      logo: 'https://www.bigmat.es/logo.svg'
+      logo: 'https://vectorseek.com/wp-content/uploads/2023/10/BigMat-Logo-Vector.svg--300x100.png'
     },
     { 
       name: 'Leroy Merlin', 
-      logo: 'https://www.leroymerlin.es/logo.svg'
+      logo: 'https://logosmarcas.net/wp-content/uploads/2022/04/Leroy-Merlin-Logo.png'
     },
   ];
 
