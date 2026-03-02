@@ -174,7 +174,7 @@ export default function Home() {
 
               <div className="relative h-96">
                 <img
-                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/WhatsApp Image 2026-03-01 at 16.53.41 (1)_64aac639.jpeg"
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663357231444/nzt7vNonUZAFY9pgAHbQ5o/hero-real-ebr_85bb467e.jpg"
                   alt="About"
                   className="w-full h-full object-cover"
                 />
