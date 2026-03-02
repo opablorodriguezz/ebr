@@ -394,6 +394,9 @@ export default function Home() {
             <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
               {t('contact.title')}
             </h2>
+            <p className="text-center text-gray-600 mb-12">
+              {t('contact.description')}
+            </p>
 
             <div className="max-w-2xl mx-auto">
               <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -406,6 +409,7 @@ export default function Home() {
                     name="name"
                     value={formData.name}
                     onChange={handleFormChange}
+                    placeholder={t('contact.name')}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
                   />
@@ -421,6 +425,7 @@ export default function Home() {
                       name="email"
                       value={formData.email}
                       onChange={handleFormChange}
+                      placeholder={t('contact.email')}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
                     />
@@ -435,6 +440,7 @@ export default function Home() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleFormChange}
+                      placeholder={t('contact.phone')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
                     />
                   </div>
@@ -448,6 +454,7 @@ export default function Home() {
                     name="message"
                     value={formData.message}
                     onChange={handleFormChange}
+                    placeholder={t('contact.message')}
                     required
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-600"
