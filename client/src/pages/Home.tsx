@@ -334,32 +334,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <Testimonials />
-
-        {/* Suppliers Section */}
-        <section className="py-24 bg-gray-50">
-          <div className="container">
-            <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
-              {t('suppliers.title')}
-            </h2>
-            <p className="text-center text-gray-600 mb-12 text-lg">
-              {t('suppliers.description')}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-              {suppliers.map((supplier, index) => (
-                <div key={index} className="flex justify-center">
-                  <img
-                    src={supplier.logo}
-                    alt={supplier.name}
-                    className="h-20 object-contain hover:opacity-80 transition-opacity"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Google Maps Section */}
         <section className="py-24 bg-white">
