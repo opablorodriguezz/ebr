@@ -76,6 +76,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.developed': 'Desenvolupat per',
     'footer.rights': 'Tots els drets reservats',
+    'gall.mas': 'Veure més',
+    'gall.tods': 'Veure tots els projectes',
   },
   es: {
     // Header
@@ -144,6 +146,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.developed': 'Desarrollado por',
     'footer.rights': 'Todos los derechos reservados',
+    'gall.mas': 'Ver más',
+    'gall.tods': 'Ver todos los proyectos',
   },
 };
 
