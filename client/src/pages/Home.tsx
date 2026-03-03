@@ -347,7 +347,7 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
                     <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <p className="text-sm font-semibold">Ver más</p>
+                      <p className="text-sm font-semibold">{t('gall.mas')}</p>
                     </div>
                   </div>
                 </div>
@@ -360,7 +360,7 @@ export default function Home() {
                 onClick={() => setSelectedImage(0)}
                 className="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold transition-colors duration-300"
               >
-                Ver todos los proyectos ({galleryImages.length})
+                {t('gall.tods')} ({galleryImages.length})
               </button>
             </div>
           </div>
