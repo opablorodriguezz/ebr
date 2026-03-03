@@ -4,6 +4,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import Testimonials from '@/components/Testimonials';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -15,6 +16,7 @@ export default function Home() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -41,72 +43,85 @@ export default function Home() {
   };
 
   // All 57 gallery images from CDN
- const galleryImages = [
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(1).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(2).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(3).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(4).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(5).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(6).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(7).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(8).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41.jpeg',
+  const galleryImages = [
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(1).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(2).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(3).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(4).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(5).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(6).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(7).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41%20(8).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.41.jpeg',
 
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(1).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(2).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(3).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(4).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(5).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(6).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(7).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(8).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(9).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(10).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(11).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(12).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(1).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(2).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(3).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(4).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(5).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(6).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(7).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(8).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(9).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(10).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(11).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42%20(12).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.42.jpeg',
 
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(1).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(2).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(3).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(4).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(5).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(6).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(7).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(8).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(9).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(10).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(11).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(12).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(1).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(2).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(3).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(4).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(5).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(6).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(7).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(8).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(9).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(10).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(11).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43%20(12).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.43.jpeg',
 
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(1).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(2).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(3).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(4).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(1).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(2).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(3).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44%20(4).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2016.53.44.jpeg',
 
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.00.24.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.00.24.jpeg',
 
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(1).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(2).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(3).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(4).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(5).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(6).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(7).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(1).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(2).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(3).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(4).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(5).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(6).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53%20(7).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.53.jpeg',
 
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.54%20(1).jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.54.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.54%20(1).jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.03.54.jpeg',
 
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.06.04.jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.07.12.jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.07.30.jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.09.03.jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.09.35.jpeg',
-  'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.09.53.jpeg',
-];
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.06.04.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.07.12.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.07.30.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.09.03.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.09.35.jpeg',
+    'https://ebrobresireformes.edgeone.app/WhatsApp%20Image%202026-03-01%20at%2017.09.53.jpeg',
+  ];
+
+  // Show only first 9 images in grid
+  const displayedImages = galleryImages.slice(0, 9);
+
+  const handlePrevImage = () => {
+    if (selectedImage === null) return;
+    setSelectedImage(selectedImage === 0 ? galleryImages.length - 1 : selectedImage - 1);
+  };
+
+  const handleNextImage = () => {
+    if (selectedImage === null) return;
+    setSelectedImage(selectedImage === galleryImages.length - 1 ? 0 : selectedImage + 1);
+  };
 
   const suppliers = [
     { 
@@ -148,14 +163,12 @@ export default function Home() {
               {t('hero.subtitle')}
             </p>
 
-
             <a
               href="#portfolio"
               className="inline-block px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors duration-300"
             >
               {t('hero.cta')}
             </a>
-            
           </div>
         </section>
 
@@ -312,28 +325,136 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Portfolio Section */}
+        {/* Portfolio Section with Modal Gallery */}
         <section id="portfolio" className="py-24 bg-white">
           <div className="container">
             <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
               {t('portfolio.title')}
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryImages.map((image, index) => (
-                <div key={index} className="relative h-64 overflow-hidden group cursor-pointer">
+            {/* Gallery Grid - Show first 9 images */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {displayedImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative h-64 overflow-hidden group cursor-pointer"
+                  onClick={() => setSelectedImage(index)}
+                >
                   <img
                     src={image}
                     alt={`Project ${index + 1}`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                    <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <p className="text-sm font-semibold">Ver más</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* View All Button */}
+            <div className="text-center">
+              <button
+                onClick={() => setSelectedImage(0)}
+                className="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold transition-colors duration-300"
+              >
+                Ver todos los proyectos ({galleryImages.length})
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Modal Lightbox */}
+        {selectedImage !== null && (
+          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-50"
+            >
+              <X size={32} />
+            </button>
+
+            {/* Main Image */}
+            <div className="relative w-full max-w-4xl h-[70vh]">
+              <img
+                src={galleryImages[selectedImage]}
+                alt={`Project ${selectedImage + 1}`}
+                className="w-full h-full object-contain"
+              />
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={handlePrevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20 p-2 rounded-full transition-colors"
+              >
+                <ChevronLeft size={32} />
+              </button>
+
+              <button
+                onClick={handleNextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20 p-2 rounded-full transition-colors"
+              >
+                <ChevronRight size={32} />
+              </button>
+
+              {/* Image Counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm font-semibold bg-black/50 px-4 py-2 rounded">
+                {selectedImage + 1} / {galleryImages.length}
+              </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2 overflow-x-auto px-4 pb-4">
+              {galleryImages.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImage(index)}
+                  className={`flex-shrink-0 w-16 h-16 rounded overflow-hidden transition-all ${
+                    selectedImage === index
+                      ? 'ring-2 ring-amber-600 scale-110'
+                      : 'opacity-60 hover:opacity-100'
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={`Thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Testimonials Section */}
+        <Testimonials />
+
+        {/* Suppliers Section */}
+        <section className="py-24 bg-gray-50">
+          <div className="container">
+            <h2 className="font-serif text-5xl font-bold text-center mb-16 text-gray-900">
+              {t('suppliers.title')}
+            </h2>
+            <p className="text-center text-gray-600 mb-12 text-lg">
+              {t('suppliers.description')}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+              {suppliers.map((supplier, index) => (
+                <div key={index} className="flex justify-center">
+                  <img
+                    src={supplier.logo}
+                    alt={supplier.name}
+                    className="h-20 object-contain hover:opacity-80 transition-opacity"
+                  />
                 </div>
               ))}
             </div>
           </div>
         </section>
-
 
         {/* Google Maps Section */}
         <section className="py-24 bg-white">
@@ -458,3 +579,4 @@ export default function Home() {
     </div>
   );
 }
+
